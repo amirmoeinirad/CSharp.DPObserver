@@ -15,8 +15,6 @@
 // but here we are using interfaces to illustrate the pattern more explicitly.
 
 
-using System;
-
 namespace ObserverDP
 {
     // The Subject Class
