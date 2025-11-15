@@ -5,6 +5,8 @@
 // Help from ChatGPT
 
 // Main Concept: Observer Design Pattern
+
+// The Observer Design Pattern is a behavioral design pattern that defines a one-to-many dependency
 // In this pattern, an object, known as the subject, maintains a list of its dependents, called observers,
 // and notifies them automatically of any state changes, usually by calling one of their methods.
 // This pattern is particularly useful in scenarios where a change in one object needs to be reflected in multiple other objects
@@ -12,17 +14,18 @@
 
 // This is a simple example of the Observer Design Pattern in C#.
 // This concept can also be implemented using events and delegates in C#,
-// but here we are using interfaces to illustrate the pattern more explicitly.
+// but here, we are using interfaces to illustrate the pattern more explicitly.
 
 
 namespace ObserverDP
 {
     // The Subject Class
     // This class maintains a list of observers and notifies them of any state changes.
-    class Stock
+    internal class Stock
     {
         // List of observers
-        private List<IObserver> observers = new List<IObserver>();
+        private List<IObserver> observers = [];
+
         // State of the subject (Stock Price)
         private int price;
 
@@ -39,13 +42,16 @@ namespace ObserverDP
             }
         }
 
-        // Method to attach or add a new observer.
+        // Method to attach or add a new observer to the list.
         public void Attach(IObserver observer) => observers.Add(observer);
 
-        // Method to detach or remove an observer.
+        // Method to detach or remove an observer from the list.
         public void Detach(IObserver observer) => observers.Remove(observer);
 
         // Method to notify all observers of a change in state.
+        // (1) The Price property calls the Notify method whenever the price is changed.
+        // (2) The Notify method iterates through the list of observers and calls their Update method,
+        // passing the new price as an argument.
         private void Notify()
         {
             foreach (var observer in observers)
@@ -60,17 +66,17 @@ namespace ObserverDP
 
 
     // Observer interface
-    interface IObserver
+    internal interface IObserver
     {
         void Update(int price);
     }
 
 
     ////////////////////////////////////////////////
-    
+
 
     // Concrete Observer (Observer Implementation)
-    class Investor : IObserver
+    internal class Investor : IObserver
     {
         // Name of the investor
         private string name;
@@ -81,7 +87,7 @@ namespace ObserverDP
         // Update method to be called when the subject's state changes.
         public void Update(int price)
         {
-            Console.WriteLine($"{name} notified: Stock price changed to {price}");
+            Console.WriteLine($"{name} notified: Stock price changed to {price}.");
         }
     }
 
@@ -100,7 +106,7 @@ namespace ObserverDP
 
 
             // Create a stock object. (The Subject)
-            Stock stock = new Stock();
+            Stock stock = new();
 
             // Create investors (Observers).
             Investor a = new Investor("Amir");
@@ -113,6 +119,7 @@ namespace ObserverDP
             // Change the stock price and see how observers are notified.
             stock.Price = 100;
             stock.Price = 120;
+            stock.Price = 110;
 
             // Detach an observer and change the price again.
             stock.Detach(a);
