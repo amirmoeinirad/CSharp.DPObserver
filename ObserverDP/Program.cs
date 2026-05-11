@@ -3,7 +3,7 @@
 // September 2025
 
 // The Observer Design Pattern
-// Version: 1.0
+// Version: 1.0 -> The notification process is implemented manually.
 
 // This pattern defines a one-to-many dependency.
 // An object, known as the subject, maintains a list of its dependents, called observers,
