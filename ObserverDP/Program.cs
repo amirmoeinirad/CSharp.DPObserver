@@ -2,10 +2,11 @@
 // Amir Moeini Rad
 // September 2025
 
-// Main Concept: The Observer Design Pattern
+// The Observer Design Pattern
+// Version: 1.0
 
 // This pattern defines a one-to-many dependency.
-// In this pattern, an object, known as the subject, maintains a list of its dependents, called observers,
+// An object, known as the subject, maintains a list of its dependents, called observers,
 // and notifies them automatically of any state changes.
 // This pattern is particularly useful in scenarios where a change in one object needs to be reflected in multiple other objects.
 
@@ -18,29 +19,27 @@ namespace ObserverDP
         // List of observers
         private List<IObserver> observers = [];
 
-        // State of the subject (Stock Price)
+        // State of the subject
         private int price;
-
-        // Property to get/set the stock price
+        
         public int Price
         {
             get => price;
             set
             {
                 price = value;
-
                 // Notify all observers of the change in price.
                 Notify();
             }
         }
 
-        // Method to add a new observer to the list.
+        // Add a new observer to the list.
         public void Attach(IObserver observer) => observers.Add(observer);
 
-        // Method to remove an observer from the list.
+        // Remove an observer from the list.
         public void Detach(IObserver observer) => observers.Remove(observer);
 
-        // Method to notify all observers of a change in state.        
+        // Notify all observers of a change in state.        
         private void Notify()
         {
             foreach (var observer in observers)
@@ -49,9 +48,7 @@ namespace ObserverDP
             Console.WriteLine();
         }
     }
-
-
-    ////////////////////////////////////////////////
+    
 
 
     // Observer interface
@@ -59,9 +56,7 @@ namespace ObserverDP
     {
         void Update(int price);
     }
-
-
-    ////////////////////////////////////////////////
+    
 
 
     // Concrete Observer
@@ -77,9 +72,7 @@ namespace ObserverDP
             Console.WriteLine($"{name} notified: Stock price changed to {price}.");
         }
     }
-
-
-    ////////////////////////////////////////////////
+    
 
 
     // Main Program
@@ -92,14 +85,14 @@ namespace ObserverDP
             Console.WriteLine("--------------------------------------\n");
 
 
-            // Create a stock object. (The Subject)
+            // The Subject
             Stock stock = new();
 
-            // Create investors (Observers).
+            // Observers
             Investor a = new("Amir");
             Investor b = new("Elham");
 
-            // Adding observers to the list of observers in the stock.
+            // Adding observers to the list of observers.
             stock.Attach(a);
             stock.Attach(b);
 
